@@ -15,6 +15,8 @@ export default class ProductDetailComponent {
   @Input() id?: string;
   product = signal<Product | null>(null);
   cover = signal('');
+  zoomActive = false;
+  backgroundPosition = 'center';
   private productService = inject(ProductService);
   private cartService = inject(CartService);
 
@@ -43,6 +45,24 @@ export default class ProductDetailComponent {
       this.cartService.addtoCart(product);
     }
 
+  }
+
+  onMouseMove(event: MouseEvent) {
+  if (window.innerWidth < 1024) return; // solo desktop
+
+    const element = event.currentTarget as HTMLElement;
+    const rect = element.getBoundingClientRect();
+
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+    this.zoomActive = true;
+    this.backgroundPosition = `${x}% ${y}%`;
+  }
+
+  onMouseLeave() {
+    this.zoomActive = false;
+    this.backgroundPosition = 'center';
   }
 
 }

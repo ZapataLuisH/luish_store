@@ -4,12 +4,16 @@
   <div class="flex flex-col w-full lg:w-1/2">
 
     <!-- Imagen principal -->
-    <div class="w-full rounded border border-gray-200">
-      <img
-        alt="ecommerce"
-        class="w-full h-[280px] sm:h-[320px] md:h-[450px] lg:h-[500px]"
-        [src]="cover()"
-      />
+    <div
+      class="w-full rounded border border-gray-200 overflow-hidden cursor-zoom-in
+            h-[250px] sm:h-[320px] md:h-[450px] lg:h-[500px]"
+      (mousemove)="onMouseMove($event)"
+      (mouseleave)="onMouseLeave()"
+      [style.background-image]="'url(' + cover() + ')'"
+      [style.background-size]="zoomActive ? '200%' : '100%'"
+      [style.background-position]="backgroundPosition"
+      style="background-repeat: no-repeat;"
+    >
     </div>
 
     <!-- Miniaturas -->
@@ -40,7 +44,7 @@
       {{ product()?.title }}
     </h1>
 
-    <p class="leading-relaxed">
+    <p class="text-sm md:text-base leading-relaxed pl-2 md:pl-0">
       {{ product()?.description }}
     </p>
 
