@@ -1,0 +1,45 @@
+<section class="max-w-2xl mx-auto py-12 px-6">
+  <h1 class="text-3xl font-bold mb-8 text-center">
+    Contáctenos
+  </h1>
+
+  <form
+    name="contact"
+    method="POST"
+    data-netlify="true"
+    class="flex flex-col gap-4"
+  >
+    <!-- Campo oculto requerido por Netlify -->
+    <input type="hidden" name="form-name" value="contact" />
+
+    <input
+      type="text"
+      name="name"
+      placeholder="Nombre"
+      required
+      class="border p-3 rounded"
+    />
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Correo electrónico"
+      required
+      class="border p-3 rounded"
+    />
+
+    <textarea
+      name="message"
+      placeholder="Escribe tu mensaje"
+      required
+      class="border p-3 rounded h-32"
+    ></textarea>
+
+    <button
+      type="submit"
+      class="bg-red-500 text-white py-3 rounded hover:bg-red-600 transition"
+    >
+      Enviar mensaje
+    </button>
+  </form>
+</section>
