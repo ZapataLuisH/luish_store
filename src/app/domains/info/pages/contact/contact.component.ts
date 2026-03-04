@@ -1,22 +1,26 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
+  selector: 'app-contact',
   standalone: true,
-  template: `
-    <div class="text-center py-20">
-      <h1 class="text-2xl font-bold text-green-600">
-        ✅ Mensaje enviado correctamente
-      </h1>
-      <p class="mt-4">Redirigiendo...</p>
-    </div>
-  `
+  imports: [NgIf],
+  templateUrl: './contact.component.html',
+  styleUrl: './contact.component.css'
 })
-export class ThanksComponent {
+export class ContactComponent {
 
-  constructor(private router: Router) {
-    setTimeout(() => {
-      this.router.navigate(['/contact']);
-    }, 2000);
+  private route = inject(ActivatedRoute);
+
+  success = false;
+
+  constructor() {
+    this.route.queryParams.subscribe(params => {
+      if (params['success'] === 'true') {
+        this.success = true;
+        setTimeout(() => this.success = false, 5000);
+      }
+    });
   }
 }
