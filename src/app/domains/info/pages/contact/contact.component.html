@@ -41,6 +41,14 @@
         Enviar mensaje
       </button>
 
+      <!-- MENSAJE DE EXITO -->
+      <p
+        *ngIf="successMessage"
+        class="text-green-600 text-center font-medium mt-2"
+      >
+        ✔ Mensaje enviado correctamente
+      </p>
+
     </form>
 
   </div>

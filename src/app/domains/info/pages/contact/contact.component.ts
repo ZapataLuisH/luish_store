@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
 
-  constructor(private router: Router) {}
+  successMessage = false;
 
   submitForm(event: Event) {
 
@@ -24,7 +25,15 @@ export class ContactComponent {
       body: new URLSearchParams(data as any).toString()
     })
     .then(() => {
-      this.router.navigate(['/thanks']);
+
+      this.successMessage = true;
+
+      form.reset();
+
+      setTimeout(() => {
+        this.successMessage = false;
+      }, 4000);
+
     })
     .catch(() => {
       alert("Error enviando el mensaje");
