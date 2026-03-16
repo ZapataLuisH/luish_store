@@ -1,26 +1,35 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [NgIf],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.css'
+  styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
 
-  private route = inject(ActivatedRoute);
+  constructor(private router: Router) {}
 
-  success = false;
+  submitForm(event: Event) {
 
-  constructor() {
-    this.route.queryParams.subscribe(params => {
-      if (params['success'] === 'true') {
-        this.success = true;
-        setTimeout(() => this.success = false, 5000);
-      }
+    event.preventDefault();
+
+    const form = event.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(data as any).toString()
+    })
+    .then(() => {
+      this.router.navigate(['/thanks']);
+    })
+    .catch(() => {
+      alert("Error enviando el mensaje");
     });
+
   }
+
 }
