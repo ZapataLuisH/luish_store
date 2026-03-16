@@ -1,42 +1,50 @@
-import { Component, inject, signal } from '@angular/core';
-import { Product } from '../../models/product.model';
-import { CartService } from '../../services/cart.service';
-import { RouterLinkWithHref, RouterLinkActive } from '@angular/router';
+import { Component, signal, computed } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLinkWithHref, RouterLinkActive],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
 
-  // 👇 MOBILE MENU
-  hideMobileMenu = signal(true);
+  // MOBILE MENU
+  private mobileMenuHidden = signal(true);
 
   toggleMobileMenu() {
-    this.hideMobileMenu.update(prev => !prev);
+    this.mobileMenuHidden.update(v => !v);
   }
 
-  // 👇 CART MENU
-  hideSideMenu = signal(true);
+  hideMobileMenu() {
+    return this.mobileMenuHidden();
+  }
 
-  private cartService = inject(CartService);
-
-  cart = this.cartService.cart;
-  total = this.cartService.total;
+  // CART SIDE MENU
+  private sideMenuHidden = signal(true);
 
   toogleSideMenu() {
-    this.hideSideMenu.update(prevState => !prevState);
+    this.sideMenuHidden.update(v => !v);
   }
 
-  remove(product: Product) {
-    this.cartService.removeFromCart(product);
+  hideSideMenu() {
+    return this.sideMenuHidden();
   }
+
+  // CART
+  cart = signal<any[]>([]);
+
+  remove(product: any) {
+    this.cart.update(cart => cart.filter(p => p !== product));
+  }
+
+  total = computed(() =>
+    this.cart().reduce((sum, product) => sum + product.price, 0)
+  );
 
   checkout() {
-    this.cartService.sendOrderToWhatsApp();
+    alert('Checkout no implementado aún');
   }
 
 }
