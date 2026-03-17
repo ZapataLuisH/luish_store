@@ -1,55 +1,89 @@
-<div class="w-full flex justify-center px-4 py-10">
+<div class="max-w-7xl mx-auto px-4 py-12">
 
-  <div class="w-full md:w-[70%] lg:w-[50%] max-w-[600px]">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
-    <form
-      name="contact"
-      data-netlify="true"
-      (submit)="submitForm($event)"
-      class="flex flex-col gap-5 bg-white p-6 sm:p-8 rounded-xl shadow-md"
-    >
+    <!-- IZQUIERDA (INFO) -->
+    <div class="space-y-6">
 
-      <input type="hidden" name="form-name" value="contact" />
+      <h1 class="text-3xl sm:text-4xl font-bold">
+        Hablemos 👋
+      </h1>
 
-      <input
-        type="text"
-        name="name"
-        placeholder="Nombre"
-        required
-        class="border p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-red-400"
-      />
-
-      <input
-        type="email"
-        name="email"
-        placeholder="Correo electrónico"
-        required
-        class="border p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-red-400"
-      />
-
-      <textarea
-        name="message"
-        placeholder="Escribe tu mensaje"
-        required
-        class="border p-3 rounded-lg h-32 w-full resize-none focus:outline-none focus:ring-2 focus:ring-red-400"
-      ></textarea>
-
-      <button
-        type="submit"
-        class="bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition font-medium"
-      >
-        Enviar mensaje
-      </button>
-
-      <!-- MENSAJE DE EXITO -->
-      <p
-        *ngIf="successMessage"
-        class="text-green-600 text-center font-medium mt-2"
-      >
-        ✔ Mensaje enviado correctamente
+      <p class="text-gray-600 text-sm sm:text-base">
+        ¿Tienes dudas sobre algún producto? ¿Necesitas asesoría?
+        Estamos aquí para ayudarte a encontrar la mejor solución.
       </p>
 
-    </form>
+      <div class="space-y-3 text-sm text-gray-600">
+
+        <div>✔ Respuesta rápida</div>
+        <div>✔ Asesoría personalizada</div>
+        <div>✔ Atención directa</div>
+
+      </div>
+
+    </div>
+
+
+    <!-- DERECHA (FORMULARIO) -->
+    <div>
+
+      <form
+        name="contact"
+        data-netlify="true"
+        (submit)="submitForm($event)"
+        class="flex flex-col gap-5 bg-white p-6 sm:p-8 rounded-2xl shadow-lg border"
+      >
+
+        <input type="hidden" name="form-name" value="contact" />
+
+        <div class="flex flex-col gap-1">
+          <label class="text-sm text-gray-600">¿Cómo te llamas?</label>
+          <input
+            type="text"
+            name="name"
+            required
+            class="border p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+          />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-sm text-gray-600">Tu correo</label>
+          <input
+            type="email"
+            name="email"
+            required
+            class="border p-3 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+          />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-sm text-gray-600">¿En qué podemos ayudarte?</label>
+          <textarea
+            name="message"
+            required
+            class="border p-3 rounded-lg h-32 w-full resize-none focus:outline-none focus:ring-2 focus:ring-red-400 transition"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition font-medium"
+        >
+          Enviar mensaje
+        </button>
+
+        <!-- MENSAJE DE ÉXITO -->
+        <p
+          *ngIf="successMessage"
+          class="text-green-600 text-center font-medium mt-2"
+        >
+          ✔ Mensaje enviado correctamente
+        </p>
+
+      </form>
+
+    </div>
 
   </div>
 

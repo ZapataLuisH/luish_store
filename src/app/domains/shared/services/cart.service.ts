@@ -1,12 +1,15 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, signal, inject } from '@angular/core';
 import { Product } from '../models/product.model';
+import { NotificationService } from './notification.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-
+  private notification = inject(NotificationService);
   cart = signal<Product[]>([]);
+
 
   total = computed(()=>{
     const cart = this.cart();
@@ -31,7 +34,7 @@ export class CartService {
     const cart = this.cart();
 
     if(cart.length === 0){
-      alert('El carrito está vacío');
+      this.notification.show('Tu carrito está vacío 🛒');
       return;
     }
 
@@ -48,5 +51,7 @@ export class CartService {
 
     window.open(url, '_blank');
   }
+
+
 
 }

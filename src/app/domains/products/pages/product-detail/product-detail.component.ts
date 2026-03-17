@@ -3,6 +3,7 @@ import { Product } from '@shared/models/product.model';
 import { ProductService } from '@shared/services/product.service';
 import {CommonModule} from '@angular/common';
 import { CartService } from '@shared/services/cart.service';
+import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,6 +20,7 @@ export default class ProductDetailComponent {
   backgroundPosition = 'center';
   private productService = inject(ProductService);
   private cartService = inject(CartService);
+  private notification = inject(NotificationService);
 
   ngOnInit(){
     if (this.id){
@@ -40,12 +42,15 @@ export default class ProductDetailComponent {
   }
 
   addToCart(){
-    const product = this.product();
-    if (product){
-      this.cartService.addtoCart(product);
-    }
+  const product = this.product();
+  if (product){
+    this.cartService.addtoCart(product);
 
+    this.notification.show(
+      `Agregaste "${product.title}" al carrito 🛒`
+    );
   }
+}
 
   onMouseMove(event: MouseEvent) {
   if (window.innerWidth < 1024) return; // solo desktop
