@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges, inject, signal } from '@angular/core';
 import {ProductComponent} from '@products/components/product/product.component'
-
+import { NotificationService } from '@shared/services/notification.service';
 import { RouterLinkWithHref } from '@angular/router';
 import {Product} from '@shared/models/product.model';
 import {HeaderComponent} from '@shared/components/header/header.component'
@@ -23,6 +23,7 @@ export default class ListComponent {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
   private categoryService = inject(CategoryService);
+  private notification = inject(NotificationService);
   @Input() category_id?: string;
 
   ngOnInit(){
@@ -40,7 +41,8 @@ export default class ListComponent {
 
 
   addToCart(product: Product){
-    this.cartService.addtoCart(product)
+    this.cartService.addtoCart(product);
+    this.notification.show(`"${product.title}" agregado al carrito 🛒`);
   }
 
   private getProducts(){
@@ -64,4 +66,17 @@ export default class ListComponent {
       }
     })
   }
+
+  contactWhatsApp(){
+  const phone = '573227358997'; // tu número
+
+  const message = encodeURIComponent(
+    'Hola, tengo una consulta sobre tus productos 👋'
+  );
+
+  const url = `https://wa.me/${phone}?text=${message}`;
+
+  window.open(url, '_blank');
+}
+
 }

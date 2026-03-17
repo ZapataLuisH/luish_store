@@ -1,5 +1,6 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CartService } from '../../services/cart.service'; // ajusta ruta
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+
+  constructor(public cartService: CartService) {}
 
   // MOBILE MENU
   private mobileMenuHidden = signal(true);
@@ -21,7 +24,7 @@ export class HeaderComponent {
     return this.mobileMenuHidden();
   }
 
-  // CART SIDE MENU
+  // SIDE MENU
   private sideMenuHidden = signal(true);
 
   toogleSideMenu() {
@@ -32,19 +35,9 @@ export class HeaderComponent {
     return this.sideMenuHidden();
   }
 
-  // CART
-  cart = signal<any[]>([]);
-
+  // 🔥 IMPORTANTE: usar el método correcto del service
   remove(product: any) {
-    this.cart.update(cart => cart.filter(p => p !== product));
-  }
-
-  total = computed(() =>
-    this.cart().reduce((sum, product) => sum + product.price, 0)
-  );
-
-  checkout() {
-    alert('Checkout no implementado aún');
+    this.cartService.removeFromCart(product);
   }
 
 }

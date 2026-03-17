@@ -62,7 +62,7 @@
         (click)="toogleSideMenu()">
 
         <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs flex items-center justify-center">
-          {{ cart().length }}
+          {{ cartService.cart().length }}
         </div>
 
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +137,7 @@
 
   <div class="pt-4 flex flex-col gap-3">
 
-    @for (product of cart(); track product) {
+    @for (product of cartService.cart(); track product) {
 
       <div class="flex justify-between items-center">
 
@@ -166,10 +166,10 @@
 
   <div class="mt-4">
 
-    <p class="font-semibold">Total: ${{ total() }}</p>
+    <p class="font-semibold">Total: ${{ cartService.total() }}</p>
 
     <button
-      (click)="checkout()"
+      (click)="cartService.sendOrderToWhatsApp()"
       class="w-full mt-4 bg-green-600 text-white py-3 rounded hover:bg-green-700">
 
       Finalizar compra
