@@ -15,7 +15,7 @@
 
       <!-- LOGO -->
       <span class="self-center text-xl font-semibold whitespace-nowrap">
-        ToolsStore
+        Tools-Store
       </span>
 
       <!-- MENU DESKTOP -->
@@ -61,7 +61,7 @@
         class="p-2 border rounded relative"
         (click)="toogleSideMenu()">
 
-        <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs flex items-center justify-center">
+        <div class="absolute -top-2 -left-2 rounded h-5 w-5 bg-black text-white text-xs flex items-center justify-center transition transform duration-200">
           {{ cartService.cart().length }}
         </div>
 
@@ -121,7 +121,7 @@
 
 <!-- CART SIDE MENU -->
 <div
-  class="fixed border-l-4 top-0 right-0 z-40 w-72 h-screen p-4 overflow-y-auto transition-transform bg-white"
+  class="fixed border-l-4 top-0 right-0 z-40 w-72 h-screen p-4 overflow-y-auto bg-white transition-all duration-300 ease-in-out"
   [class.translate-x-full]="hideSideMenu()">
 
   <div class="flex justify-between items-center">
@@ -139,7 +139,11 @@
 
     @for (product of cartService.cart(); track product) {
 
-      <div class="flex justify-between items-center">
+      <div
+        class="flex justify-between items-center p-2 rounded-lg transition hover:bg-gray-50"
+        [class.opacity-0]="removing === product"
+        [class.translate-x-5]="removing === product"
+      >
 
         <div class="flex space-x-2 items-center">
           <img class="w-6 h-6"
@@ -153,8 +157,25 @@
 
         <button
           (click)="remove(product)"
-          class="text-red-500 font-bold">
-          X
+          class="p-2 rounded-full hover:bg-red-100 transition group"
+          title="Eliminar producto"
+        >
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5 text-gray-500 group-hover:text-red-500 transition"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 7.5h12M9.75 7.5V6a2.25 2.25 0 012.25-2.25h0A2.25 2.25 0 0114.25 6v1.5m3.75 0v10.125A2.625 2.625 0 0115.375 20.25H8.625A2.625 2.625 0 016 17.625V7.5m3 3v6m6-6v6"
+            />
+          </svg>
+
         </button>
 
       </div>
@@ -166,11 +187,13 @@
 
   <div class="mt-4">
 
-    <p class="font-semibold">Total: ${{ cartService.total() }}</p>
+    <p class="font-semibold transition hover:scale-105">
+      Total: ${{ cartService.total() }}
+    </p>
 
     <button
       (click)="cartService.sendOrderToWhatsApp()"
-      class="w-full mt-4 bg-green-600 text-white py-3 rounded hover:bg-green-700">
+      class="w-full mt-4 bg-green-600 text-white py-3 rounded hover:bg-green-700 transition">
 
       Finalizar compra
 

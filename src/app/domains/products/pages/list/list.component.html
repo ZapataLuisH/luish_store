@@ -1,43 +1,79 @@
-<div class="flex flex-col lg:flex-row gap-6">
+<div class="bg-gray-50 min-h-screen py-10">
 
-  <!-- SIDEBAR CATEGORIAS -->
-  <div class="w-full lg:w-80">
+  <div class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-8">
 
-    <ul class="flex lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-2">
+    <!-- SIDEBAR CATEGORIAS -->
+    <div class="w-full lg:w-80 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm h-fit">
 
-      <li>
-        <a routerLink="/" class="whitespace-nowrap hover:underline">
-          All
-        </a>
-      </li>
+      <ul class="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-2">
 
-      @for (category of categories(); track category) {
         <li>
           <a
             routerLink="/"
-            [queryParams]="{category_id: category.id}"
-            class="whitespace-nowrap hover:underline"
+            class="whitespace-nowrap px-3 py-2 rounded-lg hover:bg-gray-100 transition"
           >
-            {{ category.nombre }}
+            All
           </a>
         </li>
+
+        @for (category of categories(); track category) {
+          <li>
+            <a
+              routerLink="/"
+              [queryParams]="{category_id: category.id}"
+              class="whitespace-nowrap px-3 py-2 rounded-lg hover:bg-gray-100 transition"
+            >
+              {{ category.nombre }}
+            </a>
+          </li>
+        }
+
+      </ul>
+
+    </div>
+
+    <!-- CONTENIDO DERECHO -->
+    <div class="w-full">
+
+      @if (loading()) {
+
+        <!-- LOADER -->
+        <div class="w-full flex justify-center items-center py-20">
+
+          <div class="flex flex-col items-center gap-4">
+
+            <!-- SPINNER -->
+            <div class="w-10 h-10 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
+
+            <!-- TEXTO -->
+            <p class="text-gray-600 text-sm">
+              Buscando los mejores productos para ti...
+            </p>
+
+          </div>
+
+        </div>
+
+      } @else {
+
+        <!-- GRID PRODUCTOS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+          @for (product of products(); track product) {
+            <app-product
+              [product]="product"
+              (addToCart)="addToCart($event)" />
+          }
+
+        </div>
+
       }
 
-    </ul>
+    </div>
 
   </div>
 
-  <!-- GRID PRODUCTOS -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
-
-    @for (product of products(); track product) {
-      <app-product
-        [product]="product"
-        (addToCart)="addToCart($event)" />
-    }
-
-  </div>
-
+  <!-- BOTÓN WHATSAPP -->
   <button class="whatsapp-contact" (click)="contactWhatsApp()">
     <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="whatsapp">
     <span>¿Tienes dudas?</span>

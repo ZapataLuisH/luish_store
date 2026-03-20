@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CartService } from '../../services/cart.service'; // ajusta ruta
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +12,9 @@ import { CartService } from '../../services/cart.service'; // ajusta ruta
 export class HeaderComponent {
 
   constructor(public cartService: CartService) {}
+
+  // 🔥 NUEVO: estado para animación
+  removing: any = null;
 
   // MOBILE MENU
   private mobileMenuHidden = signal(true);
@@ -35,9 +38,18 @@ export class HeaderComponent {
     return this.sideMenuHidden();
   }
 
-  // 🔥 IMPORTANTE: usar el método correcto del service
+  // 🔥 AQUÍ ESTÁ LA MAGIA
   remove(product: any) {
-    this.cartService.removeFromCart(product);
+
+    // activa animación
+    this.removing = product;
+
+    // espera animación y luego elimina
+    setTimeout(() => {
+      this.cartService.removeFromCart(product);
+      this.removing = null;
+    }, 300);
+
   }
 
 }
