@@ -6,9 +6,9 @@ Este proyecto implementa buenas prácticas de desarrollo frontend moderno, manej
 
 ---
 
-## 🚀 Demo
+## 🚀 Productivo
 
-🔗 Próximamente desplegado en Vercel / Netlify
+🔗 Desplegado en Netlify
 
 ---
 
