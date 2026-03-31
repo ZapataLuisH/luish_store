@@ -1,27 +1,43 @@
-# Store
+# 🛒 ToolsStore - E-commerce App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+Aplicación web tipo e-commerce desarrollada con Angular, enfocada en la venta de productos tecnológicos, accesorios y herramientas industriales.
 
-## Development server
+Este proyecto implementa buenas prácticas de desarrollo frontend moderno, manejo de estado con signals y experiencia de usuario optimizada.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 🚀 Demo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+🔗 Próximamente desplegado en Vercel / Netlify
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🧠 Características principales
 
-## Running unit tests
+- 📦 Listado dinámico de productos desde API
+- 🛍️ Carrito de compras con estado global
+- 🔔 Notificaciones UX (toast) al agregar productos
+- ⏳ Loading state con spinner
+- 📱 Diseño responsive (mobile-first)
+- 💬 Botón de contacto vía WhatsApp
+- 📄 Página de detalle de producto
+- 🧩 Arquitectura modular (Angular standalone components)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 🛠️ Tecnologías utilizadas
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Frontend
+- Angular 17 (Standalone Components)
+- TypeScript
+- TailwindCSS
+- Signals (state management)
 
-## Further help
+### Backend
+- Node.js
+- Express
+- Supabase (PostgreSQL)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+## 📁 Estructura del proyecto
