@@ -115,7 +115,7 @@ Puedes hacer fork del proyecto y enviar un pull request.
 Si tienes preguntas o quieres colaborar:
 
 WhatsApp: disponible en la aplicación
-Email: (agrega tu correo aquí)
+Email: zapataluish@gmailcom
 📄 Licencia
 
 Este proyecto es de uso personal.
