@@ -64,7 +64,7 @@ export class HeaderComponent {
       return;
     }
 
-    this.http.post<any>('http://localhost:3000/create-payment', { cart })
+    this.http.post('https://api-store-pfjt.onrender.com/create-payment', { cart })
       .subscribe({
 
         next: (response) => {
