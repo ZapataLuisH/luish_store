@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
+import { HttpClient } from '@angular/common/http';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +14,9 @@ import { CartService } from '../../services/cart.service';
 export class HeaderComponent {
 
   constructor(public cartService: CartService) {}
+  private http = inject(HttpClient);
 
-  // 🔥 NUEVO: estado para animación
+  // Estado para animación
   removing: any = null;
 
   // MOBILE MENU
@@ -38,7 +41,7 @@ export class HeaderComponent {
     return this.sideMenuHidden();
   }
 
-  // 🔥 AQUÍ ESTÁ LA MAGIA
+  // 🔥 OPCION PRINCIPAL
   remove(product: any) {
 
     // activa animación
@@ -49,6 +52,35 @@ export class HeaderComponent {
       this.cartService.removeFromCart(product);
       this.removing = null;
     }, 300);
+
+  }
+
+  checkout() {
+
+    const cart = this.cartService.cart();
+
+    if (cart.length === 0) {
+      alert('Tu carrito está vacío');
+      return;
+    }
+
+    this.http.post<any>('http://localhost:3000/create-payment', { cart })
+      .subscribe({
+
+        next: (response) => {
+
+          console.log('Respuesta backend:', response);
+
+          // 🔥 REDIRECCIONAR A MERCADOPAGO
+          window.location.href = response.url;
+
+        },
+
+        error: (err) => {
+          console.error('Error en checkout:', err);
+        }
+
+      });
 
   }
 

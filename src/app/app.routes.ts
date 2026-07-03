@@ -28,6 +28,24 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./domains/products/pages/product-detail/product-detail.component')
       },
+      {
+        path: 'success',
+        loadComponent: () =>
+          import('./pages/success/success.component')
+            .then(m => m.SuccessComponent)
+      },
+      {
+        path: 'failure',
+        loadComponent: () =>
+          import('./pages/failure/failure.component')
+            .then(m => m.FailureComponent)
+      },
+      {
+        path: 'pending',
+        loadComponent: () =>
+          import('./pages/pending/pending.component')
+            .then(m => m.PendingComponent)
+      },
     ]
   },
   {
